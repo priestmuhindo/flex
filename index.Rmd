@@ -5,6 +5,17 @@ output:
     orientation: columns
     vertical_layout: fill
     source_code: "https://github.com/apreshill/06-flexdashboard-bslib"
+    theme:
+      version: 4
+      bg: "#7887A4"
+      fg: "#682C37"  # changes reactable text color- yay!
+      primary: "#F6955E" # orange - does not seem to do anything for me here
+      navbar-bg: "#A8CDEC" # blue
+      headings-color: "#F6955E" # orange
+      base_font: 
+        google: Fraunces
+      heading_font:
+        google: Lato
 editor_options: 
   chunk_output_type: console
 ---
@@ -34,9 +45,28 @@ write_csv(dl, "cran-log.csv")
 dl <- read_csv("cran-log.csv")
 ```
 
+## Sidebar {.sidebar}
+
+The goal of `palmerpenguins` is to provide a great dataset for data exploration & visualization, as an alternative to `iris`.
+
+Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.
+
+Data are available by CC-0 license in accordance with the Palmer Station LTER Data Policy and the LTER Data Access Policy for Type I data.
+
+To cite the palmerpenguins package, please use:
+
+```{r}
+#| results: 'hide'
+#| echo: TRUE
+citation("palmerpenguins")
+```
+
+
+
 ## Column {data-width="450" .tabset}
 
 ### Daily downloads (smoothed)
+
 
 ```{r}
 # from https://github.com/hadley/cran-downloads/blob/master/server.R
