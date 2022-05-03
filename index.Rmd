@@ -32,13 +32,33 @@ ggplot2::theme_set(theme_minimal())
 
 # CRAN downloads
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 # set eval to true for first run if cran-log.csv doesn't exist
 dl <- cranlogs::cran_downloads(c("palmerpenguins", "distill", "blogdown"),
                                from = "2020-08-01",
                                to = "2021-12-01") %>% 
   as_tibble() 
 write_csv(dl, "cran-log.csv")
+library("altair")
+library("tibble")
+library("jsonlite")
+
+vega_data <- import_vega_data()
+chart <- 
+  alt$Chart(vega_data$wheat())$
+  mark_bar()$
+  encode(
+    x = "year:O",
+    y = "wheat:Q",
+    # The highlight will be set on the result of a conditional statement
+    color=alt$condition(
+      "datum.year == 1810",  # If the year is 1810 this test returns True,
+      alt$value("orange"),     # which sets the bar orange.
+      alt$value("steelblue")   # If it's not True, it sets the bar steelblue.
+    )
+  )$properties(width=600)
+
+chart
 ```
 
 ```{r}
